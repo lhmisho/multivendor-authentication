@@ -4,7 +4,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from .models import User
 
 
-class VendorCreateSerializer(serializers.Serializer):
+class VendorCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=68, write_only=True)
 
     class Meta:
@@ -21,8 +21,7 @@ class VendorCreateSerializer(serializers.Serializer):
         return attrs
 
     def create(self, validated_data):
-        user = User.objects.create_vendor(**validated_data)
-        return user
+        return User.objects.create_vendor(**validated_data)
 
 
 class UserSerializer(serializers.Serializer):
